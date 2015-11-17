@@ -1,0 +1,20 @@
+{
+  "name": "BankClientJS",
+  "version": "0.0.1",
+  "homepage": "https://github.com/masters-info-nantes/cash-baby",
+  "authors": [
+    "kuroidoruido <anthony.pena@outlook.fr>"
+  ],
+  "description": "BankClientJS test frontend with js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery.soap": "~1.6.7"
+  }
+}
