@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.alma.services.cashbaby.bank</groupId>
-  <artifactId>BankClient</artifactId>
+  <groupId>org.alma.services.cashbaby.supplier</groupId>
+  <artifactId>SupplierClient</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Axis2-Client</name>
   <repositories>
@@ -36,11 +36,11 @@
         </executions>
         <configuration>
           <outputDirectory>${basedir}/generated-sources</outputDirectory>
-          <packageName>org.alma.services.cashbaby.bank.client</packageName>
+          <packageName>org.alma.services.cashbaby.supplier.client</packageName>
           <databindingName>adb</databindingName>
           <language>java</language>
-          <wsdlFile>http://localhost:9763/services/Bank?wsdl</wsdlFile>
-          <portName>BankHttpsEndpoint</portName>
+          <wsdlFile>http://localhost:9763/services/Supplier?wsdl</wsdlFile>
+          <portName>SupplierHttpsSoap12Endpoint</portName>
         </configuration>
       </plugin>
       <plugin>
