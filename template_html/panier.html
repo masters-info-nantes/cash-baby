@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ca$hBaby</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Ca$hBaby</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./catalogue.html">Produits</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#"><img src="./img/shopping.png" style="max-width:1.75em;max-height:1.75em;"> <!--Panier--></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- Liste des produits avec quantité!-->
+    <div class="container">
+      <table class="table table-hover table-condensed" id="basket">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td class="col-xs-1 hidden-xs">
+              <img class="img-responsive" src="./img/dollar.png" style="max-width:4em;max-height:4em;"></img>
+            </td>
+            <td class="col-xs-5" >
+              <h4 class="nomargin">Dollar</h4>
+            </td>
+            <td class="col-xs-1" data-th="Prix">0.50€</td>
+            <td class="col-xs-2" data-th="Quantite">
+              <input class="form-control text center" type="number" value="1"/>
+            </td>
+            <td class="col-xs-1" class="text-center" data-th="Sous-Total">0.50€</td>
+            <td class="col-xs-2" class="action" data-th="">
+              <button class="btn btn-info btn-sm">
+                <i class="fa fa-refresh"></i>
+              </button>
+              <button class="btn btn-danger btn-sm">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="hidden-xs" colspan="3"></td>
+            <td class="hidden-xs text-center">
+              <strong>Total 0.50€</strong>
+            </td>
+            <td>
+              <a class="btn btn-success btn-block" href="./infosclient.html">
+                Valider
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
