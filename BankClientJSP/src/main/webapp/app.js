@@ -13,9 +13,10 @@ app.factory('CashbabyAPI', ['$q',
 
             run : function(apiName, data) {
               var deferred = $q.defer();
+               data = typeof data !== 'undefined' ? data : {};
 $.soap({
-  url: 'http://localhost:9763/services/Bank/',
-  namespaceURL:'http://bank.cashbaby.services.alma.org',
+  url: 'http://localhost:9763/services/Shop/',
+  namespaceURL:'http://shop.cashbaby.services.alma.org',
   method: apiName,
   data: data,
   soap12: true,
@@ -66,7 +67,7 @@ app
                     url :'/produit-{id}',
                     views :  {
                         '': {
-                            templateUrl: 'partials/catalogue.html',
+                            templateUrl: 'partials/produit.html',
                             controller: 'cashbaby.controller.produit'
                         },
                     },
@@ -97,31 +98,37 @@ app
 app.controller('cashbaby.controller.catalogue', ['$scope', 'CashbabyAPI',
   function clientList($scope, CashbabyAPI) {
     CashbabyAPI.run('getItems').then(function(data) {
-      $scope.produits = data;
+      $scope.produits = data.return;
       console.log(data);
     }, function(data) {
-      console.log(data);
+      console.log("ko");
     });
 
   }
 ]);
 
-app.controller('cashbaby.controller.produit', ['$scope', 'ngStorage', '$stateParams',
-  function clientList($scope, ngStorage, $stateParams) {
+app.controller('cashbaby.controller.produit', ['$scope', '$localStorage', '$stateParams', 'CashbabyAPI',
+  function clientList($scope, $localStorage, $stateParams, CashbabyAPI) {
+    $scope.nbProduct = 1;
+    $scope.msg = "";
     CashbabyAPI.run('getItem', {id: $stateParams.id}).then(function(data) {
-      $scope.produit = data;
+      $scope.produit = data.return;
+      console.log(data.return);
     });
     $scope.validate = function() {
-      CashbabyAPI.run('getItem', {orderId: ngStorage.orderId, itemId: $stateParams.id, quantity: $scope.form.nbProduct}).then(function(data) {
-        $scope.produit = data;
+      CashbabyAPI.run('reserve', {orderId: ngStorage.orderId, itemId: $stateParams.id, quantity: $scope.nbProduct}).then(function(data) {
+        $scope.msg = $scope.nbProduct+" produit(s) a bien été ajouté";
+        $scope.nbProduct = 1;
+        console.log(data);
+      }, function(data) {
+        console.log("ko");
       });
-      $scope.form.nbProduct = 0;
     }
   }
 ]);
 
-app.controller('cashbaby.controller.panier', ['$scope', 'ngStorage',
-  function clientList($scope, ngStorage) {
+app.controller('cashbaby.controller.panier', ['$scope', '$localStorage',
+  function clientList($scope, $localStorage) {
     $scope.getTotal = function(){
         var total = 0;
         for(var i = 0; i < $scope.cart.products.length; i++){
@@ -133,8 +140,8 @@ app.controller('cashbaby.controller.panier', ['$scope', 'ngStorage',
   }
 ]);
 
-app.controller('cashbaby.controller.info', ['$scope', 'ngStorage',
-  function clientList($scope, ngStorage) {
+app.controller('cashbaby.controller.info', ['$scope', '$localStorage',
+  function clientList($scope, $localStorage) {
 
   }
 ]);

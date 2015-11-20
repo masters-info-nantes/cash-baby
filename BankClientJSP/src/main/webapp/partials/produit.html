@@ -18,10 +18,11 @@
     </div>
     <div class="col-md-4"> <!-- Bloc quantité/ajout panier-->
       <div class="thumbnail">
+        {{msg}}<br>
         <label for="quantity">Quantite:</label>
         <form class="form-inline">
           <div class="form-group">
-            <input type="number" min="1" value="1" class="form-control" id="number" ng-model="form.nbProduct">
+            <input type="number" min="1" value="1" class="form-control" id="number" ng-model="nbProduct">
           </div>
           <div class="form-group">
             <a class="btn btn-primary" type="submit" role="button" href="" ng-click="validate()">Ajouter au panier</a>
