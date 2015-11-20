@@ -1,0 +1,33 @@
+<div class="container"> <!-- TODO:add to basket + description-->
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+      <div class="thumbnail">
+        <img class="img-responsive" ng-src="{{produit.photoUrl}}" style="max-width:10em;max-height:10em;">
+        <div class="caption-full">
+          <h4 class="pull-right">{{produit.price}}€</h4>
+          <h4>{{produit.name}}</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <h4> Description du produit</h4>
+        <p>
+          {{produit.description}}
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4"> <!-- Bloc quantité/ajout panier-->
+      <div class="thumbnail">
+        <label for="quantity">Quantite:</label>
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="number" min="1" value="1" class="form-control" id="number" ng-model="form.nbProduct">
+          </div>
+          <div class="form-group">
+            <a class="btn btn-primary" type="submit" role="button" href="" ng-click="validate()">Ajouter au panier</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

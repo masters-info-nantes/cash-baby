@@ -1,0 +1,40 @@
+<div class="container">
+  <table class="table table-hover table-condensed" id="basket">
+    <thead></thead>
+    <tbody>
+      <tr ng-repeat="produit in produits">
+        <td class="col-xs-1 hidden-xs">
+          <img class="img-responsive" ng-src="{{produit.imageUrl}}" style="max-width:4em;max-height:4em;"></img>
+        </td>
+        <td class="col-xs-5" >
+          <h4 class="nomargin">{{produit.name}}</h4>
+        </td>
+        <td class="col-xs-1" data-th="Prix">{{produit.price}}€</td>
+        <td class="col-xs-2" data-th="Quantite">
+          <input class="form-control text center" type="number" min="1" ng-model="" />
+        </td>
+        <td class="col-xs-1" class="text-center" data-th="Sous-Total">{{produit.price*}}€</td>
+        <td class="col-xs-2" class="action" data-th="">
+          <button class="btn btn-danger btn-sm">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="hidden-xs" colspan="3"></td>
+        <td class="hidden-xs text-center">
+          <strong>Total 0.50€</strong>
+        </td>
+        <td>
+          <a class="btn btn-success btn-block" ui-sref="webapp.info">
+            Valider la commande
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
