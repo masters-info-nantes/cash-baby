@@ -7,13 +7,14 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Supplier {
-	private Map<String,Integer> stock;// itemId => quantity
-	private Map<String,ItemDetailed> items;// itemId => item
-	private Map<String,Order> orders;// orderId => order
+	private static Map<String,Integer> stock;// itemId => quantity
+	private static Map<String,ItemDetailed> items;// itemId => item
+	private static Map<String,Order> orders;// orderId => order
 	
-	public Supplier() {
-		this.stock = new HashMap<String,Integer>();
-		this.items = new HashMap<String,ItemDetailed>();
+	static {
+		Supplier.stock = new HashMap<String,Integer>();
+		Supplier.items = new HashMap<String,ItemDetailed>();
+		Supplier.orders = new HashMap<String,Order>();
 		
 		ItemDetailed[] tmp = {
 			new ItemDetailed(
@@ -117,11 +118,15 @@ public class Supplier {
 		};
 		
 		for(ItemDetailed i : tmp) {
-			this.stock.put(i.getId(),100);
-			this.items.put(i.getId(),i);
+			Supplier.stock.put(i.getId(),100);
+			Supplier.items.put(i.getId(),i);
 		}
 	}
 	
+	/** Gets alls items with basic informations
+	 * 
+	 * @return All items without details
+	 */
 	public List<Item> getItems() {
 		List<Item> res = new ArrayList<Item>();
 		for(ItemDetailed item : this.items.values()) {
@@ -137,39 +142,110 @@ public class Supplier {
 		return res;
 	}
 	
+	/** Gets one item by its id
+	 * 
+	 * @param id The id of the item
+	 * 
+	 * @return The item with all details wanted
+	 */
 	public ItemDetailed getItem(String id) {
 		return this.items.get(id);
 	}
 	
-	public String order(Order order) {
-		int quantity;
-		for(String itemId : order.keySet()) {
-			quantity = this.stock.get(itemId);
-			if(order.get(itemId).intValue() <= quantity) {
-				this.stock.put(itemId,this.stock.get(itemId)+quantity);
-			} else {
-				return null;
-			}
+	/** Reserves a quantity of an item and associate it to an order
+	 * 
+	 * @param orderId The id of the order. If {@code null}, generate a new order id;
+	 * @param itemId The id of the wanted item
+	 * @param quantity The quantity wanted of the item
+	 * 
+	 * @return The order id
+	 * 
+	 * @exception NotEnoughStockException If wanted quantity is higher than quantity in stock
+	 */
+	public String reserve(String orderId, String itemId, int quantity) throws NotEnoughStockException {
+		String currentOrderId;
+		if(orderId == null) {
+			currentOrderId = UUID.randomUUID().toString();
+			Supplier.orders.put(currentOrderId,new Order());
+		} else {
+			currentOrderId = orderId;
 		}
 		
-		String orderId;
+		int stockQuantity = Supplier.stock.get(itemId);
+		if(stockQuantity >= quantity) {
+			Supplier.stock.put(itemId,stockQuantity-quantity);
+		} else {
+			throw new NotEnoughStockException();
+		}
+		
+		Supplier.orders.get(currentOrderId).put(itemId,quantity);
+		
+		return currentOrderId;
+	}
+	
+	/** Unreserves a quantity of an item
+	 * 
+	 * @param orderId The id of the order. If {@code null}, generate a new order id;
+	 * @param itemId The id of the wanted item
+	 * @param quantity The quantity wanted to restock of the item
+	 * 
+	 * @return {@code true} if action is correctly apply, {@code false} otherwise
+	 */
+	public boolean unreserve(String orderId, String itemId, int quantity) {
+		Order order = Supplier.orders.get(orderId);
+		if(order == null) {
+			return false;
+		}
+		
+		Integer orderedQuantity = order.get(itemId);
+		if(orderedQuantity < quantity) {
+			return false;
+		}
+		
+		order.put(itemId,orderedQuantity-quantity);
+		Supplier.stock.put(
+			itemId,
+			Supplier.stock.get(itemId)+quantity
+		);
+		
+		return true;
+	}
+	
+	
+	/** Create a new order id the order
+	 * 
+	 * @return The id of the new order
+	 */
+	public String startOrder() {
+		String orderId = null;
 		do {
 			orderId = UUID.randomUUID().toString();
-		} while(!this.orders.containsKey(orderId));// ensure unique id
-		
-		this.orders.put(orderId,order);
+		} while(!Supplier.orders.containsKey(orderId));
+		Supplier.orders.put(orderId,new Order());
 		return orderId;
 	}
 	
-	public boolean order(
-	
-	public boolean cancelOrder(String orderId) {
-		Order order = this.orders.remove(orderId);
-		int quantity;
-		for(String itemId : order.keySet()) {
-			quantity = order.get(itemId).intValue();
-			this.stock.put(itemId,this.stock.get(itemId)+quantity);
+	/** Valides the order
+	 * 
+	 * @param orderId The order to validate
+	 * @param shippingAddress The address where ship the order
+	 * 
+	 * @return {@code true} if payment is validate, {@code false} otherwise 
+	 */
+	//~ public boolean order(String orderId, String shippingAddress) {
+	public boolean order(String orderId, String shippingAddress) {
+		Order order = Supplier.orders.get(orderId);
+		if(order == null) {
+			return false;
 		}
+		Supplier.orders.put(
+			orderId,
+			new Order.ClosedOrder(
+				order,
+				shippingAddress
+			)
+		);
 		return true;
 	}
+	
 }

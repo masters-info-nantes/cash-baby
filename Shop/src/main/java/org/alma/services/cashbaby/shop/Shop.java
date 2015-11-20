@@ -2,6 +2,8 @@ package org.alma.services.cashbaby.shop;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.UUID;
 import java.rmi.RemoteException;
 import org.apache.axis2.AxisFault;
@@ -10,6 +12,12 @@ import org.alma.services.cashbaby.bank.client.*;
 import org.alma.services.cashbaby.supplier.client.*;
 
 public class Shop {
+	
+	private static Map<String,Basket> orders;// orderId => order
+	
+	static {
+		orders = new HashMap<String,Basket>();
+	}
 	
 	/*public List<Item> getItems() {
 		ArrayList<Item> res = new ArrayList<Item>();
@@ -120,7 +128,7 @@ public class Shop {
 
 	/** Reserves a quantity of an item and associate it to an order
 	 * 
-	 * @param orderId The id of the order. If {@code null}, generate a new order id;
+	 * @param orderId The id of the order.
 	 * @param itemId The id of the wanted item
 	 * @param quantity The quantity wanted of the item
 	 * 
@@ -129,16 +137,10 @@ public class Shop {
 	 * @exception NotEnoughStockException If wanted quantity is higher than quantity in stock
 	 */
 	public String reserve(String orderId, String itemId, int quantity) throws NotEnoughStockException {
-		String currentOrderId;
-		if(orderId == null) {
-			currentOrderId = UUID.randomUUID().toString();
-		} else {
-			currentOrderId = orderId;
-		}
 		
 		// TODO
 		
-		return currentOrderId;
+		return orderId;
 	}
 	
 	/** Unreserves a quantity of an item
@@ -150,10 +152,32 @@ public class Shop {
 	 * @return The order id
 	 */
 	public boolean unreserve(String orderId, String itemId, int quantity) {
+		boolean supplierUnreserve = true;
 		// TODO
+		
+		Basket basket = Shop.orders.get(orderId);
+		basket.put(
+			itemId,
+			basket.get(itemId)
+		);
 		return true;
 	}
 	
+	/** Create a new order id the order
+	 * 
+	 * @return The id of the new order
+	 */
+	public String startOrder() {
+		String orderId = null;
+		orderId = UUID.randomUUID().toString();
+		// TODO
+		
+		Shop.orders.put(
+			orderId,
+			new Basket()
+		);
+		return orderId;
+	}
 	
 	/** Valides the order
 	 * 
@@ -165,14 +189,19 @@ public class Shop {
 	 */
 	//~ public boolean order(String orderId, String shippingAddress, CreditCard card) {
 	public boolean order(String orderId, String shippingAddress, String cardNumber, String cardOwnerName, String cardExpirationDate, String cardVerificationCode) {
-		BankStub.CreditCard card = new BankStub.CreditCard();
-		card.setNumber(cardNumber);
-		card.setOwnerName(cardOwnerName);
-		card.setExpirationDate(cardExpirationDate);
-		card.setVerificationCode(cardVerificationCode);
 		
 		// TODO
 		
 		return true;
+	}
+	
+	/** Gets basket from orderId
+	 * 
+	 * @param orderId The id of the wanted order
+	 * 
+	 * @return The basket corresponding to the orderId
+	 */
+	public Basket getBasket(String orderId) {
+		return Shop.orders.get(orderId);
 	}
 }
