@@ -155,11 +155,13 @@ public class Shop {
 		boolean supplierUnreserve = true;
 		// TODO
 		
-		Basket basket = Shop.orders.get(orderId);
-		basket.put(
-			itemId,
-			basket.get(itemId)
-		);
+		if(supplierUnreserve) {
+			Basket basket = Shop.orders.get(orderId);
+			basket.put(
+				this.getItem(itemId),
+				basket.get(itemId)+quantity
+			);
+		}
 		return true;
 	}
 	

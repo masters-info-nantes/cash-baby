@@ -218,9 +218,7 @@ public class Supplier {
 	 */
 	public String startOrder() {
 		String orderId = null;
-		do {
-			orderId = UUID.randomUUID().toString();
-		} while(!Supplier.orders.containsKey(orderId));
+		orderId = UUID.randomUUID().toString();
 		Supplier.orders.put(orderId,new Order());
 		return orderId;
 	}
