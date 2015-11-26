@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.alma.services.cashbaby</groupId>
+    <artifactId>Bank</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.alma.services.cashbaby.bank</groupId>
+  <artifactId>BankAPI</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>BankAPI</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+  </dependencies>
+</project>

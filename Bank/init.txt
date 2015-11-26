@@ -1,0 +1,27 @@
+<body>
+   <p:registerAccount xmlns:p="http://services.application.bank.cashbaby.services.alma.org">
+      <!--0 to 1 occurrence-->
+      <p:account>
+         <!--0 to 1 occurrence-->
+         <xs:accountNumber xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">1000</xs:accountNumber>
+         <!--0 to 1 occurrence-->
+         <xs:amount xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">100</xs:amount>
+         <!--0 to 1 occurrence-->
+         <xs:ownerName xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">CashBaby</xs:ownerName>
+      </p:account>
+   </p:registerAccount>
+</body>
+
+<body>
+   <p:registerAccount xmlns:p="http://services.application.bank.cashbaby.services.alma.org">
+      <!--0 to 1 occurrence-->
+      <p:account>
+         <!--0 to 1 occurrence-->
+         <xs:accountNumber xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">1001</xs:accountNumber>
+         <!--0 to 1 occurrence-->
+         <xs:amount xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">100</xs:amount>
+         <!--0 to 1 occurrence-->
+         <xs:ownerName xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">John Doe</xs:ownerName>
+      </p:account>
+   </p:registerAccount>
+</body>
