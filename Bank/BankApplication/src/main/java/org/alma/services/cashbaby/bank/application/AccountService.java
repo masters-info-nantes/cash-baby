@@ -1,4 +1,4 @@
-package org.alma.services.cashbaby.bank.application.services;
+package org.alma.services.cashbaby.bank.application;
 
 import org.alma.services.cashbaby.bank.api.entities.*;
 import org.alma.services.cashbaby.bank.api.services.*;

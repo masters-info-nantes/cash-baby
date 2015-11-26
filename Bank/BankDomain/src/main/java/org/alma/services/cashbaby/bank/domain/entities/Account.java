@@ -1,6 +1,8 @@
 package org.alma.services.cashbaby.bank.domain.entities;
 
-public class Account {
+import org.alma.services.cashbaby.bank.api.entities.IAccount;
+
+public class Account implements IAccount {
 	private String accountNumber;
 	private String ownerName;
 	private double amount;

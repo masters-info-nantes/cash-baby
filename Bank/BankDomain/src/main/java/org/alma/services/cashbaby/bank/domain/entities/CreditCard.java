@@ -1,6 +1,8 @@
 package org.alma.services.cashbaby.bank.domain.entities;
 
-public class CreditCard {
+import org.alma.services.cashbaby.bank.api.entities.ICreditCard;
+
+public class CreditCard implements ICreditCard {
 	private String number;
 	private String ownerName;
 	private String expirationDate;
