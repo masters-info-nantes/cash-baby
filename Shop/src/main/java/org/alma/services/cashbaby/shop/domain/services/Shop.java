@@ -82,10 +82,17 @@ public class Shop {
 	public String reserve(String orderId, String itemId, int quantity) throws org.alma.services.cashbaby.api.entities.NotEnoughStockException {
 		String resOrderId = this.supplierAccess.reserve(orderId,itemId,quantity);
 		Cart cart = Shop.orders.get(resOrderId);
-		Integer backQuantity = cart.put(itemId,new Integer(quantity));
-		if(backQuantity != null) {
-			cart.put(itemId,new Integer(quantity+backQuantity.intValue()));
+		Cart.Entry back = cart.get(itemId);
+		if(back == null) {
+			cart.put(
+				new Cart.Entry(
+					this.getItem(itemId),
+					0
+				)
+			);
+			back = cart.get(itemId);
 		}
+		back.setQuantity(back.getQuantity()+quantity);
 		return resOrderId;
 	}
 	
@@ -101,9 +108,9 @@ public class Shop {
 		boolean resOrderId = this.supplierAccess.unreserve(orderId,itemId,quantity);
 		if(resOrderId) {
 			Cart cart = Shop.orders.get(resOrderId);
-			Integer backQuantity = cart.get(itemId);
-			if(backQuantity != null) {
-				cart.put(itemId,new Integer(backQuantity.intValue()-quantity));
+			Cart.Entry back = cart.get(itemId);
+			if(back != null) {
+				back.setQuantity(back.getQuantity()-quantity);
 			}
 		}
 		return resOrderId;
@@ -134,10 +141,8 @@ public class Shop {
 		this.supplierAccess.order(orderId,shippingAddress);
 		Cart cart = this.getCart(orderId);
 		double amount = 0.0d;
-		for(String itemId : cart.keySet()) {
-			int quantity = cart.get(itemId);
-			Item item = this.getItem(itemId);
-			amount += new Double(quantity).doubleValue()*item.getPrice();
+		for(Cart.Entry item : cart) {
+			amount += new Double(item.getQuantity()).doubleValue()*item.getPrice();
 		}
 		try {
 			this.bankPayment.pay(card,"1234123412341234",amount);

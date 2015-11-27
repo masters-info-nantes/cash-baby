@@ -1,0 +1,4 @@
+mvn archetype:generate -DartifactId=BankDomain -DgroupId=org.alma.services.cashbaby.bank -Dpackage=org.alma.services.cashbaby.bank.domain -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DartifactId=BankAPI -DgroupId=org.alma.services.cashbaby.bank -Dpackage=org.alma.services.cashbaby.bank.api -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DartifactId=BankInfra -DgroupId=org.alma.services.cashbaby.bank -Dpackage=org.alma.services.cashbaby.bank.infra -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DartifactId=BankApplication -DgroupId=org.alma.services.cashbaby.bank -Dpackage=org.alma.services.cashbaby.bank.application -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
