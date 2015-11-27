@@ -1,4 +1,4 @@
-package org.alma.services.cashbaby.api.entities;
+package org.alma.services.cashbaby.domain.entities;
 
 import java.util.Map;
 import java.util.HashMap;

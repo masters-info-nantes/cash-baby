@@ -1,11 +1,14 @@
-pacakge org.alma.services.cashbaby.api.entities;
+package org.alma.services.cashbaby.shop.api.services;
 
-public interface ISupplier {
+import java.util.List;
+import org.alma.services.cashbaby.shop.api.entities.*;
+
+public interface IOrderService {
 	/** Gets alls items with basic informations
 	 * 
 	 * @return All items without details
 	 */
-	public List<Item> getItems();
+	public List<IItem> getItems();
 	
 	/** Gets one item by its id
 	 * 
@@ -13,7 +16,7 @@ public interface ISupplier {
 	 * 
 	 * @return The item with all details wanted
 	 */
-	public ItemDetailed getItem(String id);
+	public IItemDetailed getItem(String id);
 	
 	/** Reserves a quantity of an item and associate it to an order
 	 * 

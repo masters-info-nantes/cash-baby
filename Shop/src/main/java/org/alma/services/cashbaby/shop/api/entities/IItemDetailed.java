@@ -1,4 +1,4 @@
-pacakge org.alma.services.cashbaby.api.entities;
+package org.alma.services.cashbaby.shop.api.entities;
 
 public interface IItemDetailed extends IItem {
 	public String getDescription();

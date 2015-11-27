@@ -1,4 +1,4 @@
-package org.alma.services.cashbaby;
+package org.alma.services.cashbaby.shop;
 
 /**
  * Hello world!

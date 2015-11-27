@@ -25,3 +25,28 @@
       </p:account>
    </p:registerAccount>
 </body>
+
+<body>
+   <p:registerCreditCard xmlns:p="http://application.bank.cashbaby.services.alma.org">
+      <!--0 to 1 occurrence-->
+      <p:creditCard>
+         <!--0 to 1 occurrence-->
+         <xs:expirationDate xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">11/12</xs:expirationDate>
+         <!--0 to 1 occurrence-->
+         <xs:number xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">1234-1234-1234-1234</xs:number>
+         <!--0 to 1 occurrence-->
+         <xs:ownerName xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">John Doe</xs:ownerName>
+         <!--0 to 1 occurrence-->
+         <xs:verificationCode xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">789</xs:verificationCode>
+      </p:creditCard>
+      <!--0 to 1 occurrence-->
+		<p:account>
+         <!--0 to 1 occurrence-->
+         <xs:accountNumber xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">1001</xs:accountNumber>
+         <!--0 to 1 occurrence-->
+         <xs:amount xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">100</xs:amount>
+         <!--0 to 1 occurrence-->
+         <xs:ownerName xmlns:xs="http://entities.api.bank.cashbaby.services.alma.org/xsd">John Doe</xs:ownerName>
+      </p:account>
+   </p:registerCreditCard>
+</body>

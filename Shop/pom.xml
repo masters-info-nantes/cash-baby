@@ -14,5 +14,33 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+<!--
+    <dependency>
+      <groupId>org.alma.services.cashbaby</groupId>
+      <artifactId>Bank</artifactId>
+      <type>pom</type>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+-->
+    <dependency>
+      <groupId>org.alma.services.cashbaby.bank</groupId>
+      <artifactId>BankApplication</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.alma.services.cashbaby.bank</groupId>
+      <artifactId>BankAPI</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.alma.services.cashbaby</groupId>
+      <artifactId>Supplier</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 </project>
